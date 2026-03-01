@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Academic Research Search Engine</title>
+
+<style>
+
+body{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+font-family:Arial;
+color:white;
+text-align:center;
+}
+
+.container{
+width:80%;
+margin:auto;
+margin-top:60px;
+}
+
+input{
+padding:12px;
+width:350px;
+border-radius:8px;
+border:none;
+}
+
+button{
+padding:12px 20px;
+background:#ff9800;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:white;
+}
+
+.card{
+background:white;
+color:black;
+margin:20px auto;
+padding:20px;
+border-radius:12px;
+width:80%;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
+text-align:left;
+}
+
+.rank{
+font-size:20px;
+font-weight:bold;
+color:#2c5364;
+}
+
+.url a{
+color:blue;
+text-decoration:none;
+}
+
+.summary{
+margin-top:10px;
+line-height:1.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Academic Research Search Engine</h1>
+
+<form method="POST">
+<input type="text" name="query"
+placeholder="Search Research Topic..."
+required
+value="{{query if query else ''}}">
+<button type="submit">Search</button>
+</form>
+
+{% if results %}
+
+<h2>Results for "{{query}}"</h2>
+
+{% for r in results %}
+
+<div class="card">
+
+<div class="rank">
+Rank {{loop.index}}
+</div>
+
+<p><b>Term Frequency :</b> {{r.tf}}</p>
+<p><b>Inverse Document Frequency :</b> {{r.idf}}</p>
+<p><b>TF-IDF Score :</b> {{r.tfidf}}</p>
+<p><b>Cosine Similarity :</b> {{r.cosine}}</p>
+
+<div class="url">
+<b>Wikipedia URL :</b>
+<a href="{{r.url}}" target="_blank">
+{{r.url}}
+</a>
+</div>
+
+<div class="summary">
+{{r.summary}}...
+</div>
+
+</div>
+
+{% endfor %}
+{% endif %}
+
+</div>
+
+</body>
+</html>
