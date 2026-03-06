@@ -1,64 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Academic Research Search Engine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
 body{
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-font-family:Arial;
+background: linear-gradient(135deg,#141E30,#243B55);
+min-height:100vh;
 color:white;
+}
+
+/* Header */
+
+.header{
 text-align:center;
+padding:40px 20px;
 }
 
-.container{
-width:80%;
-margin:auto;
-margin-top:60px;
+.header h1{
+font-size:32px;
+font-weight:600;
+letter-spacing:1px;
 }
 
-input{
+/* Search Box */
+
+.search-container{
+display:flex;
+justify-content:center;
+margin-bottom:30px;
+}
+
+.search-box{
+display:flex;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+padding:10px;
+border-radius:10px;
+}
+
+.search-box input{
 padding:12px;
-width:350px;
-border-radius:8px;
+width:300px;
 border:none;
+outline:none;
+border-radius:6px;
+font-size:16px;
 }
 
-button{
-padding:12px 20px;
-background:#ff9800;
+.search-box button{
+margin-left:10px;
+padding:12px 18px;
 border:none;
-border-radius:8px;
-cursor:pointer;
+border-radius:6px;
+background:#ff9800;
 color:white;
+font-weight:500;
+cursor:pointer;
+transition:0.3s;
 }
+
+.search-box button:hover{
+background:#e68900;
+}
+
+/* Results title */
+
+.results-title{
+text-align:center;
+margin-bottom:20px;
+font-size:20px;
+}
+
+/* Cards */
 
 .card{
-background:white;
-color:black;
+width:85%;
 margin:20px auto;
-padding:20px;
-border-radius:12px;
-width:80%;
-box-shadow:0 0 15px rgba(0,0,0,0.4);
-text-align:left;
+padding:25px;
+
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+
+border-radius:15px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+
+transition:0.3s;
+
+animation:fadeIn 0.6s ease;
 }
 
-.rank{
-font-size:20px;
-font-weight:bold;
-color:#2c5364;
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 35px rgba(0,0,0,0.5);
 }
 
-.url a{
-color:blue;
+.card h3{
+margin-bottom:10px;
+color:#ffcc70;
+}
+
+.card p{
+margin:5px 0;
+font-size:14px;
+}
+
+.card a{
+color:#4FC3F7;
 text-decoration:none;
 }
 
-.summary{
+.card a:hover{
+text-decoration:underline;
+}
+
+.desc{
 margin-top:10px;
 line-height:1.6;
+color:#ddd;
+}
+
+/* Animation */
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.search-box input{
+width:200px;
+}
+
+.card{
+width:95%;
+}
+
 }
 
 </style>
@@ -66,52 +164,58 @@ line-height:1.6;
 
 <body>
 
-<div class="container">
-
+<div class="header">
 <h1>Academic Research Search Engine</h1>
+</div>
 
-<form method="POST">
-<input type="text" name="query"
-placeholder="Search Research Topic..."
-required
-value="{{query if query else ''}}">
+<div class="search-container">
+
+<form method="POST" class="search-box">
+
+<input type="text" name="query" placeholder="Search research topics..." required>
+
 <button type="submit">Search</button>
+
 </form>
 
-{% if results %}
+</div>
 
-<h2>Results for "{{query}}"</h2>
+{% if query %}
 
-{% for r in results %}
+<div class="results-title">
+Results for "<b>{{query}}</b>"
+</div>
+
+{% for result in results %}
 
 <div class="card">
 
-<div class="rank">
-Rank {{loop.index}}
-</div>
+<h3>Rank {{loop.index}}</h3>
 
-<p><b>Term Frequency :</b> {{r.tf}}</p>
-<p><b>Inverse Document Frequency :</b> {{r.idf}}</p>
-<p><b>TF-IDF Score :</b> {{r.tfidf}}</p>
-<p><b>Cosine Similarity :</b> {{r.cosine}}</p>
+<p><b>Term Frequency:</b> {{result.tf}}</p>
 
-<div class="url">
-<b>Wikipedia URL :</b>
-<a href="{{r.url}}" target="_blank">
-{{r.url}}
+<p><b>Inverse Document Frequency:</b> {{result.idf}}</p>
+
+<p><b>TF-IDF Score:</b> {{result.tfidf}}</p>
+
+<p><b>Cosine Similarity:</b> {{result.cosine}}</p>
+
+<p>
+<b>Wikipedia URL:</b>
+<a href="{{result.url}}" target="_blank">
+{{result.url}}
 </a>
-</div>
+</p>
 
-<div class="summary">
-{{r.summary}}...
-</div>
+<p class="desc">
+{{result.description}}
+</p>
 
 </div>
 
 {% endfor %}
-{% endif %}
 
-</div>
+{% endif %}
 
 </body>
 </html>
