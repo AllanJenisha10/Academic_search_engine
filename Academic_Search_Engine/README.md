@@ -131,16 +131,6 @@ You can access the deployed application here:
 
 ---
 
-## Application Screenshot
-
-Below is the interface of the Academic Search Engine.
-
-```
-<img height="14" src="![](C:\Users\jesus\Pictures\Screenshots\Screenshot (97).png)" width="28"/>
-```
-
----
-
 ## Deployment
 
 This project is deployed using **Render**.
