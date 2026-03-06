@@ -1,2 +1,1 @@
-
-web: python Academic_Search_Engine/app.py
+web: gunicorn Academic_Search_Engine.app:app
