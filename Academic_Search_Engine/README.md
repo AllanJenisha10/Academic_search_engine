@@ -22,12 +22,19 @@ This project demonstrates how search engines analyze text data and rank document
 ## Features
 
 • Search academic topics dynamically through a web interface
+
 • Retrieve relevant summaries from Wikipedia
+
 • Calculate **Term Frequency (TF)**
+
 • Calculate **Inverse Document Frequency (IDF)**
+
 • Generate **TF-IDF scores** for document analysis
+
 • Compute **Cosine Similarity** between query and documents
+
 • Rank documents based on relevance score
+
 • Display results with links and summaries
 
 ---
