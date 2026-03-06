@@ -170,9 +170,13 @@ After deployment, Render will generate a **public URL** that can be used to acce
 The current system demonstrates a basic academic search engine using Information Retrieval techniques. Future improvements may include:
 
 • Integration with additional academic databases and research journals
+
 • Implementation of advanced **Natural Language Processing (NLP)** techniques
+
 • Personalized user search history and authentication system
+
 • Improved graphical user interface and design
+
 • Optimization for faster search performance
 
 These enhancements would make the system more efficient and suitable for real-world academic research.
